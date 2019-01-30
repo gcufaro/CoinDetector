@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/CoinDetector.iml" filepath="$PROJECT_DIR$/CoinDetector.iml" />
+      <module fileurl="file://$PROJECT_DIR$/openCVCoinDetector/openCVCoinDetector.iml" filepath="$PROJECT_DIR$/openCVCoinDetector/openCVCoinDetector.iml" />
+      <module fileurl="file://$PROJECT_DIR$/openCVLibrary342/openCVLibrary342.iml" filepath="$PROJECT_DIR$/openCVLibrary342/openCVLibrary342.iml" />
+    </modules>
+  </component>
+</project>

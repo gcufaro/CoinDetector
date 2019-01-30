@@ -1,0 +1,37 @@
+{
+    "extractPackages": [
+        "certifi",
+        "cv2.data",
+        "ipykernel",
+        "jedi.evaluate",
+        "matplotlib",
+        "nbformat",
+        "notebook",
+        "obspy",
+        "parso",
+        "pytz",
+        "sklearn.datasets",
+        "spacy.data",
+        "theano"
+    ],
+    "assets": {
+        "bootstrap-native/x86/select.so": "84650a85a53562c5d93d886b0b59e4130f15c97b",
+        "stdlib-native/armeabi-v7a.zip": "83b593055ec70fd6b483f5e80154b3842a57bc57",
+        "bootstrap-native/armeabi-v7a/_ctypes.so": "c43bd80a2dcf1229d9cbe5aef2e4984890d65d8c",
+        "app.zip": "b04f3ee8f5e43fa3b162981b50bb72fe1acabb33",
+        "requirements-common.zip": "b04f3ee8f5e43fa3b162981b50bb72fe1acabb33",
+        "requirements-x86.zip": "b04f3ee8f5e43fa3b162981b50bb72fe1acabb33",
+        "stdlib-native/x86.zip": "561d5eee1a49bb1eeef0ccbe0c86892ba7e765a8",
+        "bootstrap-native/x86/java/chaquopy.so": "cfcb8dfc5b384b3a18abfe104745a6136678665b",
+        "stdlib.zip": "25f5c483d02f998f820ef20099e98dfdf7cbf3c2",
+        "bootstrap-native/armeabi-v7a/select.so": "d520616e4b7b85920e8c3cad02c06cbef3bf048d",
+        "bootstrap-native/x86/_ctypes.so": "3d0bfe4bc9dd5977dc4d91b459db02015f2828a5",
+        "cacert.pem": "dbbc992b589abecff8e33e799c6eecb73d9d9ef4",
+        "requirements-armeabi-v7a.zip": "b04f3ee8f5e43fa3b162981b50bb72fe1acabb33",
+        "bootstrap-native/armeabi-v7a/java/__init__.py": "da39a3ee5e6b4b0d3255bfef95601890afd80709",
+        "bootstrap.zip": "7ff97f079b53b7b9e5eccfd49cd9c5b903424ded",
+        "ticket.txt": "da39a3ee5e6b4b0d3255bfef95601890afd80709",
+        "bootstrap-native/armeabi-v7a/java/chaquopy.so": "9b5929ebd9ac1666433304196b65f53ba64319d4",
+        "bootstrap-native/x86/java/__init__.py": "da39a3ee5e6b4b0d3255bfef95601890afd80709"
+    }
+}

@@ -1,0 +1,2 @@
+include ':openCVLibrary342'
+include ':openCVCoinDetector'
