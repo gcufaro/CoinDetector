@@ -1,16 +1,29 @@
 package org.opencv.samples.colorblobdetect;
 
-
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.io.OutputStream;
+import android.util.DisplayMetrics;
 import android.util.Log;
 
+import android.graphics.Bitmap;
+import org.opencv.android.Utils;
+
+import org.opencv.core.Core;
 import org.opencv.core.CvType;
 import org.opencv.core.Mat;
+import org.opencv.core.MatOfFloat;
+import org.opencv.core.MatOfInt;
 import org.opencv.core.Point;
 import org.opencv.core.Rect;
-
+import org.opencv.imgcodecs.Imgcodecs;
 import org.opencv.core.Scalar;
 import org.opencv.core.Size;
 import org.opencv.imgproc.Imgproc;
+
+import static java.lang.System.out;
 
 /**
  * This class is a controller for puzzle game.
@@ -24,7 +37,16 @@ public class ResultProcessor {
     private static final int GRID_AREA = GRID_SIZE_X * GRID_SIZE_Y;
     private static final int GRID_EMPTY_INDEX = GRID_AREA - 1;
     private static final String TAG = "Puzzle15Processor";
-    private static final Scalar GRID_EMPTY_COLOR = new Scalar(0x33, 0x33, 0x33, 0xFF);
+
+    //define colors
+    private static final Scalar COLOR_GREY = new Scalar(0x33, 0x33, 0x33, 0xFF);
+    private static final Scalar COLOR_BLACK = new Scalar(0x00, 0x00, 0x00, 0xFF);
+    private static final Scalar COLOR_WHITE = new Scalar(0xFF, 0xFF, 0xFF, 0xFF);
+    private static final Scalar COLOR_RED = new Scalar(0xFF, 0x00, 0x00, 0xFF);
+
+    private int screenWidth;
+    private int screenHeight;
+
 
     private int[]   mIndexes;
     private int[]   mTextWidths;
@@ -53,6 +75,9 @@ public class ResultProcessor {
         mRgba15 = new Mat(height, width, CvType.CV_8UC4);
         mCells15 = new Mat[GRID_AREA];
 
+        screenWidth=width;
+        screenHeight=height;
+
         for (int i = 0; i < GRID_SIZE_Y; i++) {
             for (int j = 0; j < GRID_SIZE_X; j++) {
                 int k = i * GRID_SIZE_X + j;
@@ -78,60 +103,149 @@ public class ResultProcessor {
     /* this method to be called from the outside. it processes the frame and shuffles
      * the tiles as specified by mIndexes array
      */
-    public synchronized Mat puzzleFrame(Mat inputPicture, Mat circles) {
-        Mat[] cells = new Mat[GRID_AREA];
+    public synchronized Mat assemblyFrame(ArrayList<Mat> matCollection) {
+        // copy tiles
+        //i: index of number of tile in screen
+        //idx: index of number of coin photo of ArrayList
 
-        //get frames
-        for (int i = 0; i < GRID_SIZE_Y; i++) {
-            for (int j = 0; j < GRID_SIZE_X; j++) {
-                int k = i * GRID_SIZE_X + j;
-                int colEnd;
-                if(j!=(GRID_SIZE_X-1)){
-                    colEnd=(j+1) * inputPicture.rows() / GRID_SIZE_Y;
-                }else{
-                    colEnd=inputPicture.cols();
-                }
-                cells[k] = inputPicture.submat(
-                    i * inputPicture.rows() / GRID_SIZE_Y, (i + 1) * inputPicture.rows() / GRID_SIZE_Y,
-                    j * inputPicture.rows()/ GRID_SIZE_Y, colEnd);
+        int idx = 0;
+
+        for (int i = 0; i < GRID_AREA; i++){
+            if (((i+1) % GRID_SIZE_X) == 0) {
+                mCells15[i].setTo(COLOR_BLACK);
+            }else if (idx>=matCollection.size()){
+                mCells15[i].setTo(COLOR_GREY);
+            }else{
+                matCollection.get(idx).copyTo(mCells15[i]);
+                idx++;
             }
         }
-
-        // copy shuffled tiles
-        for (int i = 0; i < GRID_AREA; i++) {
-            int idx = mIndexes[i];
-            if ((idx+1) % GRID_SIZE_X == 0)
-                mCells15[i].setTo(GRID_EMPTY_COLOR);
-            else {
-                cells[idx].copyTo(mCells15[i]);
-
-            }
-        }
-
-        //release memory
-        for (int i = 0; i < GRID_AREA; i++)
-            cells[i].release();
 
         //draw grid
-        int rows = inputPicture.rows();
-        int cols = (inputPicture.rows()/GRID_SIZE_Y)*(GRID_SIZE_X-1);
-
-
-        drawGrid(cols, rows, mRgba15);
+        int rows = screenHeight;
+        drawGrid(rows, mRgba15);
 
         return mRgba15;
     }
 
+    public synchronized Mat getFrame(Mat inputPicture, Mat circles, int index) {
 
-    private void drawGrid(int cols, int rows, Mat drawMat) {
+
+        double[] vCircle = circles.get(0, index);
+        int xCircle = (int) Math.round(vCircle[0]);
+        int yCircle = (int) Math.round(vCircle[1]);
+        int radius = (int) Math.round(vCircle[2]);
+
+        Mat myCoin = new Mat();
+        Mat mask = new Mat();
+        Mat myCoinScaled = new Mat();
+
+        Mat subMat = inputPicture.submat(checkRow(yCircle-radius),checkRow(yCircle+radius),
+                checkCols(xCircle-radius),checkCols(xCircle+radius));
+        subMat.copyTo(myCoin);
+        subMat.copyTo(mask);
+
+        mask.setTo(COLOR_BLACK);
+        Point centerMask = new Point(radius, radius);
+
+        Imgproc.circle(mask,centerMask, radius, COLOR_WHITE, -1);
+        Core.bitwise_and(mask,myCoin,mask);
+
+        Bitmap myCoinBitmap = Bitmap.createBitmap(myCoin.cols(), myCoin.rows(),Bitmap.Config.ARGB_8888);
+        Utils.matToBitmap(myCoin, myCoinBitmap);
+
+        Bitmap maskBitmap = Bitmap.createBitmap(mask.cols(), mask.rows(),Bitmap.Config.ARGB_8888);
+        Utils.matToBitmap(mask, maskBitmap);
+
+        Bitmap ScaledBitmap = Bitmap.createScaledBitmap(maskBitmap,240,240,false);
+        Utils.bitmapToMat(ScaledBitmap,myCoinScaled);
+
+        //getHist(inputPicture);
+
+        return myCoinScaled;
+    }
+
+    private void drawGrid(int rows, Mat drawMat) {
+        int squareSize=rows / GRID_SIZE_Y;
+        int xLimit=squareSize*(GRID_SIZE_X-1);
+
+        //dibujo líneas horizontales
         for (int i = 1; i < GRID_SIZE_Y; i++) {
-            Imgproc.line(drawMat, new Point(0, i * rows / GRID_SIZE_Y), new Point(cols, i * rows / GRID_SIZE_Y), new Scalar(0, 255, 0, 255), 3);
+            Imgproc.line(drawMat, new Point(0, i * squareSize), new Point(xLimit, i* squareSize), COLOR_RED, 3);
         }
+
+        //dibujo líneas verticales
         for (int i = 1; i < GRID_SIZE_X; i++) {
-            Imgproc.line(drawMat, new Point(i * cols / GRID_SIZE_X, 0), new Point(i * cols / GRID_SIZE_X, rows), new Scalar(0, 255, 0, 255), 3);
+            Imgproc.line(drawMat, new Point(i * squareSize, 0), new Point(i * squareSize, rows), COLOR_RED, 3);
+        }
+    }
+
+    //check if row is inside bounds
+    private int checkRow(int rows){
+        if((rows<0)){
+            return 0;
+        }else if(rows>screenHeight){
+            return screenHeight;
+        }else{
+            return rows;
+        }
+    }
+
+    //check if cols is inside bounds
+    private int checkCols(int cols){
+        if((cols<0)){
+            return 0;
+        }else if(cols>screenWidth){
+            return screenWidth;
+        }else{
+            return cols;
+        }
+    }
+
+    private void getHist(Mat drawMat) {
+        List<Mat> bgrPlanes = new ArrayList<>();
+        Core.split(drawMat, bgrPlanes);
+
+        int histSize = 256;
+        float[] range = {0, 256}; //the upper boundary is exclusive
+        MatOfFloat histRange = new MatOfFloat(range);
+
+        boolean accumulate = false;
+        Mat bHist = new Mat(), gHist = new Mat(), rHist = new Mat();
+        Imgproc.calcHist(bgrPlanes, new MatOfInt(0), new Mat(), bHist, new MatOfInt(histSize), histRange, accumulate);
+        Imgproc.calcHist(bgrPlanes, new MatOfInt(1), new Mat(), gHist, new MatOfInt(histSize), histRange, accumulate);
+        Imgproc.calcHist(bgrPlanes, new MatOfInt(2), new Mat(), rHist, new MatOfInt(histSize), histRange, accumulate);
+
+
+        int histW = 512, histH = 400;
+        int binW = (int) Math.round((double) histW / histSize);
+        Mat histImage = new Mat( histH, histW, CvType.CV_8UC3, new Scalar( 0,0,0) );
+
+        Core.normalize(bHist, bHist, 0, histImage.rows(), Core.NORM_MINMAX);
+        Core.normalize(gHist, gHist, 0, histImage.rows(), Core.NORM_MINMAX);
+        Core.normalize(rHist, rHist, 0, histImage.rows(), Core.NORM_MINMAX);
+
+        float[] bHistData = new float[(int) (bHist.total() * bHist.channels())];
+        bHist.get(0, 0, bHistData);
+        float[] gHistData = new float[(int) (gHist.total() * gHist.channels())];
+        gHist.get(0, 0, gHistData);
+        float[] rHistData = new float[(int) (rHist.total() * rHist.channels())];
+        rHist.get(0, 0, rHistData);
+        for( int i = 1; i < histSize; i++ ) {
+            Imgproc.line(histImage, new Point(binW * (i - 1), histH - Math.round(bHistData[i - 1])),
+                    new Point(binW * (i), histH - Math.round(bHistData[i])), new Scalar(255, 0, 0), 2);
+            Imgproc.line(histImage, new Point(binW * (i - 1), histH - Math.round(gHistData[i - 1])),
+                    new Point(binW * (i), histH - Math.round(gHistData[i])), new Scalar(0, 255, 0), 2);
+            Imgproc.line(histImage, new Point(binW * (i - 1), histH - Math.round(rHistData[i - 1])),
+                    new Point(binW * (i), histH - Math.round(rHistData[i])), new Scalar(0, 0, 255), 2);
         }
 
+        Bitmap resultBitmapHist = Bitmap.createBitmap(histImage.cols(), histImage.rows(),Bitmap.Config.ARGB_8888);
+        Utils.matToBitmap(histImage, resultBitmapHist);
 
+        Bitmap resultBitmap = Bitmap.createBitmap(histImage.cols(), histImage.rows(),Bitmap.Config.ARGB_8888);
+        Utils.matToBitmap(histImage, resultBitmap);
+        int dummy=0;
     }
 
 

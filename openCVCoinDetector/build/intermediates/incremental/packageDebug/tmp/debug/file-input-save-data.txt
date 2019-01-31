@@ -1,5 +1,5 @@
 #Internal package file, do not edit.
-#Thu Jan 31 15:59:59 ART 2019
+#Thu Jan 31 18:56:20 ART 2019
 5.base=C\:\\Users\\cufar\\AndroidStudioProjects\\CoinDetector\\openCVCoinDetector\\build\\intermediates\\transforms\\stripDebugSymbol\\debug\\0
 42.base=C\:\\Users\\cufar\\AndroidStudioProjects\\CoinDetector\\openCVCoinDetector\\build\\intermediates\\transforms\\dexMerger\\debug\\13
 22.path=chaquopy/bootstrap-native/x86/java/__init__.py

@@ -1,26 +1,26 @@
 -- Merging decision tree log ---
 manifest
-ADDED from C:\Users\cufar\AndroidStudioProjects\CoinDetector\openCVCoinDetector\src\main\AndroidManifest.xml:2:1-38:12
-INJECTED from C:\Users\cufar\AndroidStudioProjects\CoinDetector\openCVCoinDetector\src\main\AndroidManifest.xml:2:1-38:12
-INJECTED from C:\Users\cufar\AndroidStudioProjects\CoinDetector\openCVCoinDetector\src\main\AndroidManifest.xml:2:1-38:12
-INJECTED from C:\Users\cufar\AndroidStudioProjects\CoinDetector\openCVCoinDetector\src\main\AndroidManifest.xml:2:1-38:12
-MERGED from [:openCVLibrary342] C:\Users\cufar\AndroidStudioProjects\CoinDetector\openCVLibrary342\build\intermediates\manifests\full\debug\AndroidManifest.xml:2:1-11:12
-MERGED from [com.android.support:design:27.0.2] C:\Users\cufar\.gradle\caches\transforms-1\files-1.1\design-27.0.2.aar\4e3ff4a04d007e96be664f2e70b24850\AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:support-v4:27.0.2] C:\Users\cufar\.gradle\caches\transforms-1\files-1.1\support-v4-27.0.2.aar\68ae3a2dd809e3167fcd558d1ca5b85d\AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:appcompat-v7:27.0.2] C:\Users\cufar\.gradle\caches\transforms-1\files-1.1\appcompat-v7-27.0.2.aar\270f0ba9cb181c1e37b243fabc457827\AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:recyclerview-v7:27.0.2] C:\Users\cufar\.gradle\caches\transforms-1\files-1.1\recyclerview-v7-27.0.2.aar\77c2ad1f34f190b8bc1c64cec856ab31\AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:transition:27.0.2] C:\Users\cufar\.gradle\caches\transforms-1\files-1.1\transition-27.0.2.aar\2dfcd1802d067047d2688750ab237613\AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:support-media-compat:27.0.2] C:\Users\cufar\.gradle\caches\transforms-1\files-1.1\support-media-compat-27.0.2.aar\5b8a040d90a1f181befc17a94c540efa\AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:support-fragment:27.0.2] C:\Users\cufar\.gradle\caches\transforms-1\files-1.1\support-fragment-27.0.2.aar\7fa0857a8700e487207c79c955b5c4ae\AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:support-core-utils:27.0.2] C:\Users\cufar\.gradle\caches\transforms-1\files-1.1\support-core-utils-27.0.2.aar\77c92c140053329a859f28985fcb6b23\AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:animated-vector-drawable:27.0.2] C:\Users\cufar\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-27.0.2.aar\8bfe8da62e501eddf52a4db8033b3b7d\AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:support-core-ui:27.0.2] C:\Users\cufar\.gradle\caches\transforms-1\files-1.1\support-core-ui-27.0.2.aar\8fe6bf5a918e8207168269442b352a9c\AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:support-vector-drawable:27.0.2] C:\Users\cufar\.gradle\caches\transforms-1\files-1.1\support-vector-drawable-27.0.2.aar\c6a30d58e14073db47c0262bb433bfb6\AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:support-compat:27.0.2] C:\Users\cufar\.gradle\caches\transforms-1\files-1.1\support-compat-27.0.2.aar\fb3d5ece5fdd31494ddafb1e3d672cad\AndroidManifest.xml:17:1-22:12
-MERGED from [android.arch.lifecycle:runtime:1.0.3] C:\Users\cufar\.gradle\caches\transforms-1\files-1.1\runtime-1.0.3.aar\a7da858c60a69122b683b6f58c57b1a9\AndroidManifest.xml:17:1-24:12
-INJECTED from C:\Users\cufar\AndroidStudioProjects\CoinDetector\openCVCoinDetector\src\main\AndroidManifest.xml:2:1-38:12
-INJECTED from C:\Users\cufar\AndroidStudioProjects\CoinDetector\openCVCoinDetector\src\main\AndroidManifest.xml:2:1-38:12
-INJECTED from C:\Users\cufar\AndroidStudioProjects\CoinDetector\openCVCoinDetector\src\main\AndroidManifest.xml:2:1-38:12
+ADDED from C:\Users\cufar\AndroidStudioProjects\CoinDetector\openCVCoinDetector\src\main\AndroidManifest.xml:2:1-42:12
+INJECTED from C:\Users\cufar\AndroidStudioProjects\CoinDetector\openCVCoinDetector\src\main\AndroidManifest.xml:2:1-42:12
+INJECTED from C:\Users\cufar\AndroidStudioProjects\CoinDetector\openCVCoinDetector\src\main\AndroidManifest.xml:2:1-42:12
+INJECTED from C:\Users\cufar\AndroidStudioProjects\CoinDetector\openCVCoinDetector\src\main\AndroidManifest.xml:2:1-42:12
+MERGED from [:openCVLibrary342] C:\Users\cufar\AndroidStudioProjects\CoinDetector\openCVLibrary342\build\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-11:12
+MERGED from [com.android.support:design:27.0.2] C:\Users\cufar\.gradle\caches\transforms-1\files-1.1\design-27.0.2.aar\3061a605d54429fcd9ab480b284ed8d7\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-v4:27.0.2] C:\Users\cufar\.gradle\caches\transforms-1\files-1.1\support-v4-27.0.2.aar\4e934b0d9dd1adfe27d33a41ad176ba4\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:appcompat-v7:27.0.2] C:\Users\cufar\.gradle\caches\transforms-1\files-1.1\appcompat-v7-27.0.2.aar\564462abe491bb9b859b9b745d939ebd\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:recyclerview-v7:27.0.2] C:\Users\cufar\.gradle\caches\transforms-1\files-1.1\recyclerview-v7-27.0.2.aar\25f23ce084d28f953d90d1a61a0b7f30\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:transition:27.0.2] C:\Users\cufar\.gradle\caches\transforms-1\files-1.1\transition-27.0.2.aar\93991788f1a39b802387c47d36711c1c\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-media-compat:27.0.2] C:\Users\cufar\.gradle\caches\transforms-1\files-1.1\support-media-compat-27.0.2.aar\0b5cd746ea268827b8b0e858db076824\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-fragment:27.0.2] C:\Users\cufar\.gradle\caches\transforms-1\files-1.1\support-fragment-27.0.2.aar\df1ec48562bb5e7e9d03b11587627011\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-core-utils:27.0.2] C:\Users\cufar\.gradle\caches\transforms-1\files-1.1\support-core-utils-27.0.2.aar\bec431615db3e9b156ea5778219466a7\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:animated-vector-drawable:27.0.2] C:\Users\cufar\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-27.0.2.aar\b482b3801d9912b66b086f838406a1e7\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-core-ui:27.0.2] C:\Users\cufar\.gradle\caches\transforms-1\files-1.1\support-core-ui-27.0.2.aar\3f58c8755766b9e2384e3e3dc7f0e16e\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-vector-drawable:27.0.2] C:\Users\cufar\.gradle\caches\transforms-1\files-1.1\support-vector-drawable-27.0.2.aar\9d0adf1d96714963fd569c51fe0c8930\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-compat:27.0.2] C:\Users\cufar\.gradle\caches\transforms-1\files-1.1\support-compat-27.0.2.aar\17b858656bbacc4805b33f402af77a8b\AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.lifecycle:runtime:1.0.3] C:\Users\cufar\.gradle\caches\transforms-1\files-1.1\runtime-1.0.3.aar\5289725cce9f901d30e66404db2f181f\AndroidManifest.xml:17:1-24:12
+INJECTED from C:\Users\cufar\AndroidStudioProjects\CoinDetector\openCVCoinDetector\src\main\AndroidManifest.xml:2:1-42:12
+INJECTED from C:\Users\cufar\AndroidStudioProjects\CoinDetector\openCVCoinDetector\src\main\AndroidManifest.xml:2:1-42:12
+INJECTED from C:\Users\cufar\AndroidStudioProjects\CoinDetector\openCVCoinDetector\src\main\AndroidManifest.xml:2:1-42:12
 	package
 		ADDED from C:\Users\cufar\AndroidStudioProjects\CoinDetector\openCVCoinDetector\src\main\AndroidManifest.xml:3:11-55
 		INJECTED from C:\Users\cufar\AndroidStudioProjects\CoinDetector\openCVCoinDetector\src\main\AndroidManifest.xml
@@ -75,73 +75,77 @@ ADDED from C:\Users\cufar\AndroidStudioProjects\CoinDetector\openCVCoinDetector\
 		ADDED from C:\Users\cufar\AndroidStudioProjects\CoinDetector\openCVCoinDetector\src\main\AndroidManifest.xml:23:23-48
 	android:anyDensity
 		ADDED from C:\Users\cufar\AndroidStudioProjects\CoinDetector\openCVCoinDetector\src\main\AndroidManifest.xml:27:23-48
+uses-permission#android.permission.CAMERA
+ADDED from C:\Users\cufar\AndroidStudioProjects\CoinDetector\openCVCoinDetector\src\main\AndroidManifest.xml:33:5-64
+	android:name
+		ADDED from C:\Users\cufar\AndroidStudioProjects\CoinDetector\openCVCoinDetector\src\main\AndroidManifest.xml:33:22-62
+uses-feature#android.hardware.camera
+ADDED from C:\Users\cufar\AndroidStudioProjects\CoinDetector\openCVCoinDetector\src\main\AndroidManifest.xml:35:5-84
+	android:required
+		ADDED from C:\Users\cufar\AndroidStudioProjects\CoinDetector\openCVCoinDetector\src\main\AndroidManifest.xml:35:58-82
+	android:name
+		ADDED from C:\Users\cufar\AndroidStudioProjects\CoinDetector\openCVCoinDetector\src\main\AndroidManifest.xml:35:19-57
+uses-feature#android.hardware.camera.autofocus
+ADDED from C:\Users\cufar\AndroidStudioProjects\CoinDetector\openCVCoinDetector\src\main\AndroidManifest.xml:36:5-94
+	android:required
+		ADDED from C:\Users\cufar\AndroidStudioProjects\CoinDetector\openCVCoinDetector\src\main\AndroidManifest.xml:36:68-92
+	android:name
+		ADDED from C:\Users\cufar\AndroidStudioProjects\CoinDetector\openCVCoinDetector\src\main\AndroidManifest.xml:36:19-67
+uses-feature#android.hardware.camera.front
+ADDED from C:\Users\cufar\AndroidStudioProjects\CoinDetector\openCVCoinDetector\src\main\AndroidManifest.xml:37:5-90
+	android:required
+		ADDED from C:\Users\cufar\AndroidStudioProjects\CoinDetector\openCVCoinDetector\src\main\AndroidManifest.xml:37:64-88
+	android:name
+		ADDED from C:\Users\cufar\AndroidStudioProjects\CoinDetector\openCVCoinDetector\src\main\AndroidManifest.xml:37:19-63
+uses-feature#android.hardware.camera.front.autofocus
+ADDED from C:\Users\cufar\AndroidStudioProjects\CoinDetector\openCVCoinDetector\src\main\AndroidManifest.xml:38:5-100
+	android:required
+		ADDED from C:\Users\cufar\AndroidStudioProjects\CoinDetector\openCVCoinDetector\src\main\AndroidManifest.xml:38:74-98
+	android:name
+		ADDED from C:\Users\cufar\AndroidStudioProjects\CoinDetector\openCVCoinDetector\src\main\AndroidManifest.xml:38:19-73
+uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
+ADDED from C:\Users\cufar\AndroidStudioProjects\CoinDetector\openCVCoinDetector\src\main\AndroidManifest.xml:40:5-80
+	android:name
+		ADDED from C:\Users\cufar\AndroidStudioProjects\CoinDetector\openCVCoinDetector\src\main\AndroidManifest.xml:40:22-78
 uses-sdk
-ADDED from C:\Users\cufar\AndroidStudioProjects\CoinDetector\openCVCoinDetector\src\main\AndroidManifest.xml:29:5-73
-INJECTED from C:\Users\cufar\AndroidStudioProjects\CoinDetector\openCVCoinDetector\src\main\AndroidManifest.xml:29:5-73
-INJECTED from C:\Users\cufar\AndroidStudioProjects\CoinDetector\openCVCoinDetector\src\main\AndroidManifest.xml:29:5-73
-MERGED from [:openCVLibrary342] C:\Users\cufar\AndroidStudioProjects\CoinDetector\openCVLibrary342\build\intermediates\manifests\full\debug\AndroidManifest.xml:7:5-9:41
-MERGED from [:openCVLibrary342] C:\Users\cufar\AndroidStudioProjects\CoinDetector\openCVLibrary342\build\intermediates\manifests\full\debug\AndroidManifest.xml:7:5-9:41
-MERGED from [com.android.support:design:27.0.2] C:\Users\cufar\.gradle\caches\transforms-1\files-1.1\design-27.0.2.aar\4e3ff4a04d007e96be664f2e70b24850\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:design:27.0.2] C:\Users\cufar\.gradle\caches\transforms-1\files-1.1\design-27.0.2.aar\4e3ff4a04d007e96be664f2e70b24850\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-v4:27.0.2] C:\Users\cufar\.gradle\caches\transforms-1\files-1.1\support-v4-27.0.2.aar\68ae3a2dd809e3167fcd558d1ca5b85d\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-v4:27.0.2] C:\Users\cufar\.gradle\caches\transforms-1\files-1.1\support-v4-27.0.2.aar\68ae3a2dd809e3167fcd558d1ca5b85d\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:appcompat-v7:27.0.2] C:\Users\cufar\.gradle\caches\transforms-1\files-1.1\appcompat-v7-27.0.2.aar\270f0ba9cb181c1e37b243fabc457827\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:appcompat-v7:27.0.2] C:\Users\cufar\.gradle\caches\transforms-1\files-1.1\appcompat-v7-27.0.2.aar\270f0ba9cb181c1e37b243fabc457827\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:recyclerview-v7:27.0.2] C:\Users\cufar\.gradle\caches\transforms-1\files-1.1\recyclerview-v7-27.0.2.aar\77c2ad1f34f190b8bc1c64cec856ab31\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:recyclerview-v7:27.0.2] C:\Users\cufar\.gradle\caches\transforms-1\files-1.1\recyclerview-v7-27.0.2.aar\77c2ad1f34f190b8bc1c64cec856ab31\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:transition:27.0.2] C:\Users\cufar\.gradle\caches\transforms-1\files-1.1\transition-27.0.2.aar\2dfcd1802d067047d2688750ab237613\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:transition:27.0.2] C:\Users\cufar\.gradle\caches\transforms-1\files-1.1\transition-27.0.2.aar\2dfcd1802d067047d2688750ab237613\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-media-compat:27.0.2] C:\Users\cufar\.gradle\caches\transforms-1\files-1.1\support-media-compat-27.0.2.aar\5b8a040d90a1f181befc17a94c540efa\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-media-compat:27.0.2] C:\Users\cufar\.gradle\caches\transforms-1\files-1.1\support-media-compat-27.0.2.aar\5b8a040d90a1f181befc17a94c540efa\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-fragment:27.0.2] C:\Users\cufar\.gradle\caches\transforms-1\files-1.1\support-fragment-27.0.2.aar\7fa0857a8700e487207c79c955b5c4ae\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-fragment:27.0.2] C:\Users\cufar\.gradle\caches\transforms-1\files-1.1\support-fragment-27.0.2.aar\7fa0857a8700e487207c79c955b5c4ae\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-core-utils:27.0.2] C:\Users\cufar\.gradle\caches\transforms-1\files-1.1\support-core-utils-27.0.2.aar\77c92c140053329a859f28985fcb6b23\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-core-utils:27.0.2] C:\Users\cufar\.gradle\caches\transforms-1\files-1.1\support-core-utils-27.0.2.aar\77c92c140053329a859f28985fcb6b23\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:animated-vector-drawable:27.0.2] C:\Users\cufar\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-27.0.2.aar\8bfe8da62e501eddf52a4db8033b3b7d\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:animated-vector-drawable:27.0.2] C:\Users\cufar\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-27.0.2.aar\8bfe8da62e501eddf52a4db8033b3b7d\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-core-ui:27.0.2] C:\Users\cufar\.gradle\caches\transforms-1\files-1.1\support-core-ui-27.0.2.aar\8fe6bf5a918e8207168269442b352a9c\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-core-ui:27.0.2] C:\Users\cufar\.gradle\caches\transforms-1\files-1.1\support-core-ui-27.0.2.aar\8fe6bf5a918e8207168269442b352a9c\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-vector-drawable:27.0.2] C:\Users\cufar\.gradle\caches\transforms-1\files-1.1\support-vector-drawable-27.0.2.aar\c6a30d58e14073db47c0262bb433bfb6\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-vector-drawable:27.0.2] C:\Users\cufar\.gradle\caches\transforms-1\files-1.1\support-vector-drawable-27.0.2.aar\c6a30d58e14073db47c0262bb433bfb6\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-compat:27.0.2] C:\Users\cufar\.gradle\caches\transforms-1\files-1.1\support-compat-27.0.2.aar\fb3d5ece5fdd31494ddafb1e3d672cad\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-compat:27.0.2] C:\Users\cufar\.gradle\caches\transforms-1\files-1.1\support-compat-27.0.2.aar\fb3d5ece5fdd31494ddafb1e3d672cad\AndroidManifest.xml:20:5-44
-MERGED from [android.arch.lifecycle:runtime:1.0.3] C:\Users\cufar\.gradle\caches\transforms-1\files-1.1\runtime-1.0.3.aar\a7da858c60a69122b683b6f58c57b1a9\AndroidManifest.xml:20:5-22:41
-MERGED from [android.arch.lifecycle:runtime:1.0.3] C:\Users\cufar\.gradle\caches\transforms-1\files-1.1\runtime-1.0.3.aar\a7da858c60a69122b683b6f58c57b1a9\AndroidManifest.xml:20:5-22:41
-INJECTED from C:\Users\cufar\AndroidStudioProjects\CoinDetector\openCVCoinDetector\src\main\AndroidManifest.xml:29:5-73
-INJECTED from C:\Users\cufar\AndroidStudioProjects\CoinDetector\openCVCoinDetector\src\main\AndroidManifest.xml:29:5-73
+INJECTED from C:\Users\cufar\AndroidStudioProjects\CoinDetector\openCVCoinDetector\src\main\AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from C:\Users\cufar\AndroidStudioProjects\CoinDetector\openCVCoinDetector\src\main\AndroidManifest.xml
+INJECTED from C:\Users\cufar\AndroidStudioProjects\CoinDetector\openCVCoinDetector\src\main\AndroidManifest.xml
+MERGED from [:openCVLibrary342] C:\Users\cufar\AndroidStudioProjects\CoinDetector\openCVLibrary342\build\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-9:41
+MERGED from [:openCVLibrary342] C:\Users\cufar\AndroidStudioProjects\CoinDetector\openCVLibrary342\build\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-9:41
+MERGED from [com.android.support:design:27.0.2] C:\Users\cufar\.gradle\caches\transforms-1\files-1.1\design-27.0.2.aar\3061a605d54429fcd9ab480b284ed8d7\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:design:27.0.2] C:\Users\cufar\.gradle\caches\transforms-1\files-1.1\design-27.0.2.aar\3061a605d54429fcd9ab480b284ed8d7\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-v4:27.0.2] C:\Users\cufar\.gradle\caches\transforms-1\files-1.1\support-v4-27.0.2.aar\4e934b0d9dd1adfe27d33a41ad176ba4\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-v4:27.0.2] C:\Users\cufar\.gradle\caches\transforms-1\files-1.1\support-v4-27.0.2.aar\4e934b0d9dd1adfe27d33a41ad176ba4\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:appcompat-v7:27.0.2] C:\Users\cufar\.gradle\caches\transforms-1\files-1.1\appcompat-v7-27.0.2.aar\564462abe491bb9b859b9b745d939ebd\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:appcompat-v7:27.0.2] C:\Users\cufar\.gradle\caches\transforms-1\files-1.1\appcompat-v7-27.0.2.aar\564462abe491bb9b859b9b745d939ebd\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:recyclerview-v7:27.0.2] C:\Users\cufar\.gradle\caches\transforms-1\files-1.1\recyclerview-v7-27.0.2.aar\25f23ce084d28f953d90d1a61a0b7f30\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:recyclerview-v7:27.0.2] C:\Users\cufar\.gradle\caches\transforms-1\files-1.1\recyclerview-v7-27.0.2.aar\25f23ce084d28f953d90d1a61a0b7f30\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:transition:27.0.2] C:\Users\cufar\.gradle\caches\transforms-1\files-1.1\transition-27.0.2.aar\93991788f1a39b802387c47d36711c1c\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:transition:27.0.2] C:\Users\cufar\.gradle\caches\transforms-1\files-1.1\transition-27.0.2.aar\93991788f1a39b802387c47d36711c1c\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-media-compat:27.0.2] C:\Users\cufar\.gradle\caches\transforms-1\files-1.1\support-media-compat-27.0.2.aar\0b5cd746ea268827b8b0e858db076824\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-media-compat:27.0.2] C:\Users\cufar\.gradle\caches\transforms-1\files-1.1\support-media-compat-27.0.2.aar\0b5cd746ea268827b8b0e858db076824\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-fragment:27.0.2] C:\Users\cufar\.gradle\caches\transforms-1\files-1.1\support-fragment-27.0.2.aar\df1ec48562bb5e7e9d03b11587627011\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-fragment:27.0.2] C:\Users\cufar\.gradle\caches\transforms-1\files-1.1\support-fragment-27.0.2.aar\df1ec48562bb5e7e9d03b11587627011\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-utils:27.0.2] C:\Users\cufar\.gradle\caches\transforms-1\files-1.1\support-core-utils-27.0.2.aar\bec431615db3e9b156ea5778219466a7\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-utils:27.0.2] C:\Users\cufar\.gradle\caches\transforms-1\files-1.1\support-core-utils-27.0.2.aar\bec431615db3e9b156ea5778219466a7\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:animated-vector-drawable:27.0.2] C:\Users\cufar\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-27.0.2.aar\b482b3801d9912b66b086f838406a1e7\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:animated-vector-drawable:27.0.2] C:\Users\cufar\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-27.0.2.aar\b482b3801d9912b66b086f838406a1e7\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-ui:27.0.2] C:\Users\cufar\.gradle\caches\transforms-1\files-1.1\support-core-ui-27.0.2.aar\3f58c8755766b9e2384e3e3dc7f0e16e\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-ui:27.0.2] C:\Users\cufar\.gradle\caches\transforms-1\files-1.1\support-core-ui-27.0.2.aar\3f58c8755766b9e2384e3e3dc7f0e16e\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-vector-drawable:27.0.2] C:\Users\cufar\.gradle\caches\transforms-1\files-1.1\support-vector-drawable-27.0.2.aar\9d0adf1d96714963fd569c51fe0c8930\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-vector-drawable:27.0.2] C:\Users\cufar\.gradle\caches\transforms-1\files-1.1\support-vector-drawable-27.0.2.aar\9d0adf1d96714963fd569c51fe0c8930\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-compat:27.0.2] C:\Users\cufar\.gradle\caches\transforms-1\files-1.1\support-compat-27.0.2.aar\17b858656bbacc4805b33f402af77a8b\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-compat:27.0.2] C:\Users\cufar\.gradle\caches\transforms-1\files-1.1\support-compat-27.0.2.aar\17b858656bbacc4805b33f402af77a8b\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:runtime:1.0.3] C:\Users\cufar\.gradle\caches\transforms-1\files-1.1\runtime-1.0.3.aar\5289725cce9f901d30e66404db2f181f\AndroidManifest.xml:20:5-22:41
+MERGED from [android.arch.lifecycle:runtime:1.0.3] C:\Users\cufar\.gradle\caches\transforms-1\files-1.1\runtime-1.0.3.aar\5289725cce9f901d30e66404db2f181f\AndroidManifest.xml:20:5-22:41
+INJECTED from C:\Users\cufar\AndroidStudioProjects\CoinDetector\openCVCoinDetector\src\main\AndroidManifest.xml
+INJECTED from C:\Users\cufar\AndroidStudioProjects\CoinDetector\openCVCoinDetector\src\main\AndroidManifest.xml
 	android:targetSdkVersion
-		ADDED from C:\Users\cufar\AndroidStudioProjects\CoinDetector\openCVCoinDetector\src\main\AndroidManifest.xml:29:41-70
 		INJECTED from C:\Users\cufar\AndroidStudioProjects\CoinDetector\openCVCoinDetector\src\main\AndroidManifest.xml
+		ADDED from C:\Users\cufar\AndroidStudioProjects\CoinDetector\openCVCoinDetector\src\main\AndroidManifest.xml
 		INJECTED from C:\Users\cufar\AndroidStudioProjects\CoinDetector\openCVCoinDetector\src\main\AndroidManifest.xml
 	android:minSdkVersion
-		ADDED from C:\Users\cufar\AndroidStudioProjects\CoinDetector\openCVCoinDetector\src\main\AndroidManifest.xml:29:15-40
 		INJECTED from C:\Users\cufar\AndroidStudioProjects\CoinDetector\openCVCoinDetector\src\main\AndroidManifest.xml
+		ADDED from C:\Users\cufar\AndroidStudioProjects\CoinDetector\openCVCoinDetector\src\main\AndroidManifest.xml
 		INJECTED from C:\Users\cufar\AndroidStudioProjects\CoinDetector\openCVCoinDetector\src\main\AndroidManifest.xml
-uses-permission#android.permission.CAMERA
-ADDED from C:\Users\cufar\AndroidStudioProjects\CoinDetector\openCVCoinDetector\src\main\AndroidManifest.xml:31:5-64
-	android:name
-		ADDED from C:\Users\cufar\AndroidStudioProjects\CoinDetector\openCVCoinDetector\src\main\AndroidManifest.xml:31:22-62
-uses-feature#android.hardware.camera
-ADDED from C:\Users\cufar\AndroidStudioProjects\CoinDetector\openCVCoinDetector\src\main\AndroidManifest.xml:33:5-84
-	android:required
-		ADDED from C:\Users\cufar\AndroidStudioProjects\CoinDetector\openCVCoinDetector\src\main\AndroidManifest.xml:33:58-82
-	android:name
-		ADDED from C:\Users\cufar\AndroidStudioProjects\CoinDetector\openCVCoinDetector\src\main\AndroidManifest.xml:33:19-57
-uses-feature#android.hardware.camera.autofocus
-ADDED from C:\Users\cufar\AndroidStudioProjects\CoinDetector\openCVCoinDetector\src\main\AndroidManifest.xml:34:5-94
-	android:required
-		ADDED from C:\Users\cufar\AndroidStudioProjects\CoinDetector\openCVCoinDetector\src\main\AndroidManifest.xml:34:68-92
-	android:name
-		ADDED from C:\Users\cufar\AndroidStudioProjects\CoinDetector\openCVCoinDetector\src\main\AndroidManifest.xml:34:19-67
-uses-feature#android.hardware.camera.front
-ADDED from C:\Users\cufar\AndroidStudioProjects\CoinDetector\openCVCoinDetector\src\main\AndroidManifest.xml:35:5-90
-	android:required
-		ADDED from C:\Users\cufar\AndroidStudioProjects\CoinDetector\openCVCoinDetector\src\main\AndroidManifest.xml:35:64-88
-	android:name
-		ADDED from C:\Users\cufar\AndroidStudioProjects\CoinDetector\openCVCoinDetector\src\main\AndroidManifest.xml:35:19-63
-uses-feature#android.hardware.camera.front.autofocus
-ADDED from C:\Users\cufar\AndroidStudioProjects\CoinDetector\openCVCoinDetector\src\main\AndroidManifest.xml:36:5-100
-	android:required
-		ADDED from C:\Users\cufar\AndroidStudioProjects\CoinDetector\openCVCoinDetector\src\main\AndroidManifest.xml:36:74-98
-	android:name
-		ADDED from C:\Users\cufar\AndroidStudioProjects\CoinDetector\openCVCoinDetector\src\main\AndroidManifest.xml:36:19-73

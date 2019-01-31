@@ -1,5 +1,6 @@
 package org.opencv.samples.colorblobdetect;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.opencv.android.BaseLoaderCallback;
@@ -22,6 +23,7 @@ import org.opencv.samples.colorblobdetect.ResultProcessor;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -46,12 +48,15 @@ public class CoinDetectorActivity extends Activity implements OnTouchListener, C
     private boolean touchdetector=false;
     private boolean mIsColorSelected = false;
 
-    private Mat mRgba;
-    private Mat showResults;
+    private Mat mRgba;//screenshot of camera
+    private Mat showCircles;//show circles in screen
+    private Mat showResults;//image displaying results
     private Mat mGray;
     private Mat circles;
     private int screenWidth;
     private int screenHeight;
+
+    ArrayList<Mat> matCollection = new ArrayList<>();
 
     private ResultProcessor myResultClass;
 
@@ -148,9 +153,10 @@ public class CoinDetectorActivity extends Activity implements OnTouchListener, C
     public void onCameraViewStarted(int width, int height) {
         mGray = new Mat();
         mRgba = new Mat();
+        showCircles = new Mat();
         circles = new Mat();
         mRgba = new Mat();
-        showResults = new Mat();
+        showResults = Mat.zeros(screenHeight, screenWidth, CvType.CV_8UC1);
 
         screenWidth = getWindowManager().getDefaultDisplay().getWidth();
         screenHeight = getWindowManager().getDefaultDisplay().getHeight();
@@ -173,9 +179,9 @@ public class CoinDetectorActivity extends Activity implements OnTouchListener, C
         Mat returnFrame = new Mat();
 
         mRgba = inputFrame.rgba();
-        showResults = Mat.zeros(mRgba.rows(), mRgba.cols(), CvType.CV_8UC1);
+        showCircles = inputFrame.rgba();
 
-        Imgproc.cvtColor(mRgba, mGray, Imgproc.COLOR_BGRA2GRAY);
+        Imgproc.cvtColor(showCircles, mGray, Imgproc.COLOR_BGRA2GRAY);
         Imgproc.medianBlur(mGray, mGray, 5);
 
         Imgproc.HoughCircles(mGray, circles, Imgproc.HOUGH_GRADIENT, 1, mGray.rows() / 8,
@@ -187,21 +193,21 @@ public class CoinDetectorActivity extends Activity implements OnTouchListener, C
             Point pt = new Point(Math.round(vCircle[0]), Math.round(vCircle[1]));
             int radius = (int) Math.round(vCircle[2]);
 
-            circle(mRgba, pt, radius, new Scalar(255, 0, 0), 2);
-            circle(mRgba, pt, 3, new Scalar(0,0,255), 2);
+            circle(showCircles, pt, radius, new Scalar(255, 0, 0), 2);
+            circle(showCircles, pt, 3, new Scalar(0,0,255), 2);
         }
 
 
-        String myString = "La cantidad de monedas presentes es:" + circles.cols() + touchdetector;
+        String myString = "La cantidad de monedas presentes es:" + circles.cols();
 
-        Imgproc.putText(mRgba, myString, new Point(10, setScreenHeight - 30), Core.FONT_HERSHEY_SIMPLEX, 1, new Scalar(0, 0, 0), 4);
+        Imgproc.putText(showCircles, myString, new Point(10, setScreenHeight - 30), Core.FONT_HERSHEY_SIMPLEX, 1, new Scalar(0, 0, 0), 4);
 
         if(touchdetector==false){
-            returnFrame=mRgba;
+            returnFrame=showCircles;
         }
 
         if(touchdetector){
-            showResults=myResultClass.puzzleFrame(inputFrame.rgba(),circles);
+
             returnFrame=showResults;
         }
 
@@ -210,6 +216,14 @@ public class CoinDetectorActivity extends Activity implements OnTouchListener, C
 
     public boolean onTouch(View v, MotionEvent event) {
         if(touchdetector==false) {
+            if(circles.empty()==false) {
+                for (int i = 0; i < circles.cols(); i++) {
+                    matCollection.add(myResultClass.getFrame(mRgba, circles, i));
+                }
+            }
+            showResults=myResultClass.assemblyFrame(matCollection);
+            matCollection.clear();
+            circles.empty();
             touchdetector = true;
         }else{
             touchdetector = false;
@@ -218,5 +232,6 @@ public class CoinDetectorActivity extends Activity implements OnTouchListener, C
 
         return false; // don't need subsequent touch events
     }
+
 
 }
