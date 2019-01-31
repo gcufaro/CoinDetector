@@ -6,6 +6,8 @@ import android.util.Log;
 import org.opencv.core.CvType;
 import org.opencv.core.Mat;
 import org.opencv.core.Point;
+import org.opencv.core.Rect;
+
 import org.opencv.core.Scalar;
 import org.opencv.core.Size;
 import org.opencv.imgproc.Imgproc;
@@ -16,8 +18,10 @@ import org.opencv.imgproc.Imgproc;
  */
 public class ResultProcessor {
 
-    private static final int GRID_SIZE = 5;
-    private static final int GRID_AREA = GRID_SIZE * GRID_SIZE;
+    private static final int GRID_SIZE_X = 6;
+    private static final int GRID_SIZE_Y = 3;
+
+    private static final int GRID_AREA = GRID_SIZE_X * GRID_SIZE_Y;
     private static final int GRID_EMPTY_INDEX = GRID_AREA - 1;
     private static final String TAG = "Puzzle15Processor";
     private static final Scalar GRID_EMPTY_COLOR = new Scalar(0x33, 0x33, 0x33, 0xFF);
@@ -49,10 +53,18 @@ public class ResultProcessor {
         mRgba15 = new Mat(height, width, CvType.CV_8UC4);
         mCells15 = new Mat[GRID_AREA];
 
-        for (int i = 0; i < GRID_SIZE; i++) {
-            for (int j = 0; j < GRID_SIZE; j++) {
-                int k = i * GRID_SIZE + j;
-                mCells15[k] = mRgba15.submat(i * height / GRID_SIZE, (i + 1) * height / GRID_SIZE, j * width / GRID_SIZE, (j + 1) * width / GRID_SIZE);
+        for (int i = 0; i < GRID_SIZE_Y; i++) {
+            for (int j = 0; j < GRID_SIZE_X; j++) {
+                int k = i * GRID_SIZE_X + j;
+                int colEnd;
+                if(j!=(GRID_SIZE_X-1)){
+                  colEnd=(j+1) * height / GRID_SIZE_Y;
+                }else{
+                    colEnd=width;
+                }
+                mCells15[k] = mRgba15.submat(
+                        i * height / GRID_SIZE_Y, (i + 1) * height / GRID_SIZE_Y,
+                        j * height / GRID_SIZE_Y, colEnd);
             }
         }
 
@@ -68,40 +80,42 @@ public class ResultProcessor {
      */
     public synchronized Mat puzzleFrame(Mat inputPicture, Mat circles) {
         Mat[] cells = new Mat[GRID_AREA];
-        int rows = inputPicture.rows();
-        int cols = inputPicture.cols();
 
-        rows = rows - rows%4;
-        cols = cols - cols%4;
-
-        cells[0] = inputPicture.submat(i * inputPicture.rows() / GRID_SIZE, (i + 1) * inputPicture.rows() / GRID_SIZE, j * inputPicture.cols()/ GRID_SIZE, (j + 1) * inputPicture.cols() / GRID_SIZE);
-
-        for (int i = 0; i < GRID_SIZE; i++) {
-            for (int j = 0; j < GRID_SIZE; j++) {
-                int k = i * GRID_SIZE + j;
-                cells[k] = inputPicture.submat(i * inputPicture.rows() / GRID_SIZE, (i + 1) * inputPicture.rows() / GRID_SIZE, j * inputPicture.cols()/ GRID_SIZE, (j + 1) * inputPicture.cols() / GRID_SIZE);
+        //get frames
+        for (int i = 0; i < GRID_SIZE_Y; i++) {
+            for (int j = 0; j < GRID_SIZE_X; j++) {
+                int k = i * GRID_SIZE_X + j;
+                int colEnd;
+                if(j!=(GRID_SIZE_X-1)){
+                    colEnd=(j+1) * inputPicture.rows() / GRID_SIZE_Y;
+                }else{
+                    colEnd=inputPicture.cols();
+                }
+                cells[k] = inputPicture.submat(
+                    i * inputPicture.rows() / GRID_SIZE_Y, (i + 1) * inputPicture.rows() / GRID_SIZE_Y,
+                    j * inputPicture.rows()/ GRID_SIZE_Y, colEnd);
             }
         }
 
-        rows = rows - rows%4;
-        cols = cols - cols%4;
-
-/*        // copy shuffled tiles
+        // copy shuffled tiles
         for (int i = 0; i < GRID_AREA; i++) {
             int idx = mIndexes[i];
-            if (idx == GRID_EMPTY_INDEX)
+            if ((idx+1) % GRID_SIZE_X == 0)
                 mCells15[i].setTo(GRID_EMPTY_COLOR);
             else {
                 cells[idx].copyTo(mCells15[i]);
-                if (mShowTileNumbers) {
-                    Imgproc.putText(mCells15[i], Integer.toString(1 + idx), new Point((cols / GRID_SIZE - mTextWidths[idx]) / 2,
-                            (rows / GRID_SIZE + mTextHeights[idx]) / 2), 3*//* CV_FONT_HERSHEY_COMPLEX *//*, 1, new Scalar(255, 0, 0, 255), 2);
-                }
-            }
-        }*/
 
+            }
+        }
+
+        //release memory
         for (int i = 0; i < GRID_AREA; i++)
             cells[i].release();
+
+        //draw grid
+        int rows = inputPicture.rows();
+        int cols = (inputPicture.rows()/GRID_SIZE_Y)*(GRID_SIZE_X-1);
+
 
         drawGrid(cols, rows, mRgba15);
 
@@ -110,10 +124,14 @@ public class ResultProcessor {
 
 
     private void drawGrid(int cols, int rows, Mat drawMat) {
-        for (int i = 1; i < GRID_SIZE; i++) {
-            Imgproc.line(drawMat, new Point(0, i * rows / GRID_SIZE), new Point(cols, i * rows / GRID_SIZE), new Scalar(0, 255, 0, 255), 3);
-            Imgproc.line(drawMat, new Point(i * cols / GRID_SIZE, 0), new Point(i * cols / GRID_SIZE, rows), new Scalar(0, 255, 0, 255), 3);
+        for (int i = 1; i < GRID_SIZE_Y; i++) {
+            Imgproc.line(drawMat, new Point(0, i * rows / GRID_SIZE_Y), new Point(cols, i * rows / GRID_SIZE_Y), new Scalar(0, 255, 0, 255), 3);
         }
+        for (int i = 1; i < GRID_SIZE_X; i++) {
+            Imgproc.line(drawMat, new Point(i * cols / GRID_SIZE_X, 0), new Point(i * cols / GRID_SIZE_X, rows), new Scalar(0, 255, 0, 255), 3);
+        }
+
+
     }
 
 
