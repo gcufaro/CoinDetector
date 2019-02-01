@@ -129,6 +129,7 @@ public class ResultProcessor {
     }
 
     public synchronized Mat getFrame(Mat inputPicture, Mat circles, int index) {
+        int squareSize=screenHeight / GRID_SIZE_Y;
 
 
         double[] vCircle = circles.get(0, index);
@@ -139,26 +140,44 @@ public class ResultProcessor {
         Mat myCoin = new Mat();
         Mat mask = new Mat();
         Mat myCoinScaled = new Mat();
+        Mat blackMat = new Mat(squareSize, squareSize, CvType.CV_8UC4);
+        blackMat.setTo(COLOR_BLACK);
 
         Mat subMat = inputPicture.submat(checkRow(yCircle-radius),checkRow(yCircle+radius),
                 checkCols(xCircle-radius),checkCols(xCircle+radius));
-        subMat.copyTo(myCoin);
-        subMat.copyTo(mask);
+
+
+        if((subMat.cols()>0)&&(subMat.rows()>0)) {
+            subMat.copyTo(myCoin);
+            subMat.copyTo(mask);
+        }else{
+            blackMat.copyTo(myCoin);
+            blackMat.copyTo(mask);
+        }
+
 
         mask.setTo(COLOR_BLACK);
         Point centerMask = new Point(radius, radius);
 
+
         Imgproc.circle(mask,centerMask, radius, COLOR_WHITE, -1);
         Core.bitwise_and(mask,myCoin,mask);
 
-        Bitmap myCoinBitmap = Bitmap.createBitmap(myCoin.cols(), myCoin.rows(),Bitmap.Config.ARGB_8888);
+        Bitmap myCoinBitmap;
+        Bitmap maskBitmap;
+        Bitmap ScaledBitmap;
+
+        //create bitmap of coin photo (only for debugging)
+        myCoinBitmap = Bitmap.createBitmap(myCoin.cols(), myCoin.rows(), Bitmap.Config.ARGB_8888);
         Utils.matToBitmap(myCoin, myCoinBitmap);
 
-        Bitmap maskBitmap = Bitmap.createBitmap(mask.cols(), mask.rows(),Bitmap.Config.ARGB_8888);
+        //create bitmap of mask (that contains processed coin)
+        maskBitmap = Bitmap.createBitmap(mask.cols(), mask.rows(), Bitmap.Config.ARGB_8888);
         Utils.matToBitmap(mask, maskBitmap);
 
-        Bitmap ScaledBitmap = Bitmap.createScaledBitmap(maskBitmap,240,240,false);
-        Utils.bitmapToMat(ScaledBitmap,myCoinScaled);
+        //scale bitmap to show in screen
+        ScaledBitmap = Bitmap.createScaledBitmap(maskBitmap, squareSize, squareSize, false);
+        Utils.bitmapToMat(ScaledBitmap, myCoinScaled);
 
         //getHist(inputPicture);
 
@@ -169,18 +188,18 @@ public class ResultProcessor {
         int squareSize=rows / GRID_SIZE_Y;
         int xLimit=squareSize*(GRID_SIZE_X-1);
 
-        //dibujo líneas horizontales
+        //draw horizontal lines
         for (int i = 1; i < GRID_SIZE_Y; i++) {
             Imgproc.line(drawMat, new Point(0, i * squareSize), new Point(xLimit, i* squareSize), COLOR_RED, 3);
         }
 
-        //dibujo líneas verticales
+        //draw vertical lines
         for (int i = 1; i < GRID_SIZE_X; i++) {
             Imgproc.line(drawMat, new Point(i * squareSize, 0), new Point(i * squareSize, rows), COLOR_RED, 3);
         }
     }
 
-    //check if row is inside bounds
+    //check if row is inside bounds, if not, return limits
     private int checkRow(int rows){
         if((rows<0)){
             return 0;
@@ -191,7 +210,7 @@ public class ResultProcessor {
         }
     }
 
-    //check if cols is inside bounds
+    //check if cols is inside bounds, if not, return limits
     private int checkCols(int cols){
         if((cols<0)){
             return 0;
