@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.io.OutputStream;
+
+import android.graphics.Color;
 import android.util.DisplayMetrics;
 import android.util.Log;
 
@@ -47,6 +49,9 @@ public class ResultProcessor {
     private int screenWidth;
     private int screenHeight;
 
+    private float red;
+    private float green;
+    private float blue;
 
     private int[]   mIndexes;
     private int[]   mTextWidths;
@@ -93,11 +98,11 @@ public class ResultProcessor {
             }
         }
 
-/*        for (int i = 0; i < GRID_AREA; i++) {
-            Size s = Imgproc.getTextSize(Integer.toString(i + 1), 3*//* CV_FONT_HERSHEY_COMPLEX *//*, 1, 2, null);
+        for (int i = 0; i < GRID_AREA; i++) {
+            Size s = Imgproc.getTextSize(Integer.toString(i + 1), 3/* CV_FONT_HERSHEY_COMPLEX */, 3, 4, null);
             mTextHeights[i] = (int) s.height;
             mTextWidths[i] = (int) s.width;
-        }*/
+        }
     }
 
     /* this method to be called from the outside. it processes the frame and shuffles
@@ -110,6 +115,7 @@ public class ResultProcessor {
 
         int idx = 0;
 
+
         for (int i = 0; i < GRID_AREA; i++){
             if (((i+1) % GRID_SIZE_X) == 0) {
                 mCells15[i].setTo(COLOR_BLACK);
@@ -117,6 +123,10 @@ public class ResultProcessor {
                 mCells15[i].setTo(COLOR_GREY);
             }else{
                 matCollection.get(idx).copyTo(mCells15[i]);
+
+                Imgproc.putText(mCells15[i], Integer.toString(1 + idx), new Point((screenHeight / GRID_SIZE_Y - mTextWidths[idx])/2,
+                        (screenHeight / GRID_SIZE_Y + mTextHeights[idx])/2), 3/* CV_FONT_HERSHEY_COMPLEX */, 3, COLOR_WHITE, 4);
+
                 idx++;
             }
         }
@@ -179,7 +189,25 @@ public class ResultProcessor {
         ScaledBitmap = Bitmap.createScaledBitmap(maskBitmap, squareSize, squareSize, false);
         Utils.bitmapToMat(ScaledBitmap, myCoinScaled);
 
-        //getHist(inputPicture);
+        //getHist(myCoinScaled);
+
+        int colour = 0;
+        int red = 0;
+        int blue = 0;
+        int green = 0;
+
+        for( int i = squareSize/4; i < 3*squareSize/4; i++ ) {
+            for (int j = squareSize/4; j < 3*squareSize/4; j++) {
+                colour = ScaledBitmap.getPixel(i, j);
+                red = red + Color.red(colour);
+                green = green + Color.green(colour);
+                blue = blue + Color.blue(colour);
+
+            }
+        }
+        red = red / ((squareSize/2) * (squareSize/2));
+        green = green / ((squareSize/2) * (squareSize/2));
+        blue = blue / ((squareSize/2) * (squareSize/2));
 
         return myCoinScaled;
     }
@@ -265,7 +293,26 @@ public class ResultProcessor {
         Bitmap resultBitmap = Bitmap.createBitmap(histImage.cols(), histImage.rows(),Bitmap.Config.ARGB_8888);
         Utils.matToBitmap(histImage, resultBitmap);
         int dummy=0;
+
+        red=findAverageWithoutUsingStream(rHistData);
+        green=findAverageWithoutUsingStream(gHistData);
+        blue=findAverageWithoutUsingStream(bHistData);
+
     }
+
+    private static float findSumWithoutUsingStream(float[] array) {
+        float sum = 0;
+        for (float value : array) {
+            sum += value;
+        }
+        return sum;
+    }
+
+    private static float findAverageWithoutUsingStream(float[] array) {
+        float sum = findSumWithoutUsingStream(array);
+        return sum / array.length;
+    }
+
 
 
 }
