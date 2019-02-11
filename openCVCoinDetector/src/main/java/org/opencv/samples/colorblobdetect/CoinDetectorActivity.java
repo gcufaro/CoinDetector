@@ -57,6 +57,7 @@ public class CoinDetectorActivity extends Activity implements OnTouchListener, C
     private int screenHeight;
 
     ArrayList<Mat> matCollection = new ArrayList<>();
+    ArrayList<String> coinCollection = new ArrayList<>();
 
     private ResultProcessor myResultClass;
 
@@ -219,10 +220,14 @@ public class CoinDetectorActivity extends Activity implements OnTouchListener, C
             if(circles.empty()==false) {
                 for (int i = 0; i < circles.cols(); i++) {
                     matCollection.add(myResultClass.getFrame(mRgba, circles, i));
+                    coinCollection.add(myResultClass.getPrediction());
+
                 }
             }
-            showResults=myResultClass.assemblyFrame(matCollection);
+            showResults=myResultClass.assemblyFrame(matCollection,coinCollection);
             matCollection.clear();
+            coinCollection.clear();
+
             circles.empty();
             touchdetector = true;
         }else{

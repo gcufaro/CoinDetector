@@ -26,6 +26,10 @@ import org.opencv.core.Size;
 import org.opencv.imgproc.Imgproc;
 
 import static java.lang.System.out;
+import static org.opencv.core.CvType.CV_8UC1;
+import static org.opencv.core.CvType.CV_8UC3;
+import static org.opencv.core.CvType.CV_8UC4;
+import static org.opencv.imgproc.Imgproc.cvtColor;
 
 /**
  * This class is a controller for puzzle game.
@@ -59,6 +63,7 @@ public class ResultProcessor {
 
     private Mat mRgba15;
     private Mat[] mCells15;
+    private String prediction;
     private boolean mShowTileNumbers = true;
 
     public ResultProcessor() {
@@ -77,7 +82,7 @@ public class ResultProcessor {
      * If the frames will be different size - then the result is unpredictable
      */
     public synchronized void prepareGameSize(int width, int height) {
-        mRgba15 = new Mat(height, width, CvType.CV_8UC4);
+        mRgba15 = new Mat(height, width, CV_8UC4);
         mCells15 = new Mat[GRID_AREA];
 
         screenWidth=width;
@@ -99,7 +104,7 @@ public class ResultProcessor {
         }
 
         for (int i = 0; i < GRID_AREA; i++) {
-            Size s = Imgproc.getTextSize(Integer.toString(i + 1), 3/* CV_FONT_HERSHEY_COMPLEX */, 3, 4, null);
+            Size s = Imgproc.getTextSize(Integer.toString(i + 1), 3/* CV_FONT_HERSHEY_COMPLEX */, 1, 2, null);
             mTextHeights[i] = (int) s.height;
             mTextWidths[i] = (int) s.width;
         }
@@ -108,7 +113,7 @@ public class ResultProcessor {
     /* this method to be called from the outside. it processes the frame and shuffles
      * the tiles as specified by mIndexes array
      */
-    public synchronized Mat assemblyFrame(ArrayList<Mat> matCollection) {
+    public synchronized Mat assemblyFrame(ArrayList<Mat> matCollection, ArrayList<String> coinCollection) {
         // copy tiles
         //i: index of number of tile in screen
         //idx: index of number of coin photo of ArrayList
@@ -124,8 +129,8 @@ public class ResultProcessor {
             }else{
                 matCollection.get(idx).copyTo(mCells15[i]);
 
-                Imgproc.putText(mCells15[i], Integer.toString(1 + idx), new Point((screenHeight / GRID_SIZE_Y - mTextWidths[idx])/2,
-                        (screenHeight / GRID_SIZE_Y + mTextHeights[idx])/2), 3/* CV_FONT_HERSHEY_COMPLEX */, 3, COLOR_WHITE, 4);
+                Imgproc.putText(mCells15[i], coinCollection.get(idx), new Point((screenHeight / GRID_SIZE_Y - mTextWidths[idx])/100,
+                        (screenHeight / GRID_SIZE_Y + mTextHeights[idx])/2), 3/* CV_FONT_HERSHEY_COMPLEX */, 1, COLOR_RED, 2);
 
                 idx++;
             }
@@ -150,7 +155,7 @@ public class ResultProcessor {
         Mat myCoin = new Mat();
         Mat mask = new Mat();
         Mat myCoinScaled = new Mat();
-        Mat blackMat = new Mat(squareSize, squareSize, CvType.CV_8UC4);
+        Mat blackMat = new Mat(squareSize, squareSize, CV_8UC4);
         blackMat.setTo(COLOR_BLACK);
 
         Mat subMat = inputPicture.submat(checkRow(yCircle-radius),checkRow(yCircle+radius),
@@ -165,10 +170,8 @@ public class ResultProcessor {
             blackMat.copyTo(mask);
         }
 
-
         mask.setTo(COLOR_BLACK);
         Point centerMask = new Point(radius, radius);
-
 
         Imgproc.circle(mask,centerMask, radius, COLOR_WHITE, -1);
         Core.bitwise_and(mask,myCoin,mask);
@@ -189,7 +192,19 @@ public class ResultProcessor {
         ScaledBitmap = Bitmap.createScaledBitmap(maskBitmap, squareSize, squareSize, false);
         Utils.bitmapToMat(ScaledBitmap, myCoinScaled);
 
-        //getHist(myCoinScaled);
+        //PROCESAMIENTO
+
+
+
+
+
+
+
+
+
+
+
+
 
         int colour = 0;
         int red = 0;
@@ -209,7 +224,21 @@ public class ResultProcessor {
         green = green / ((squareSize/2) * (squareSize/2));
         blue = blue / ((squareSize/2) * (squareSize/2));
 
+        int contrast=red-green;
+        if(contrast>30) {
+            prediction = "1c";
+        }else if (contrast<4){
+            prediction = "2p";
+        }else{
+            prediction = "1p";
+        }
+        prediction=prediction+Integer.toString(red) + "-" + Integer.toString(green)+ "-" + Integer.toString(blue);
+
         return myCoinScaled;
+    }
+
+    public synchronized String getPrediction(){
+        return prediction;
     }
 
     private void drawGrid(int rows, Mat drawMat) {
@@ -266,7 +295,7 @@ public class ResultProcessor {
 
         int histW = 512, histH = 400;
         int binW = (int) Math.round((double) histW / histSize);
-        Mat histImage = new Mat( histH, histW, CvType.CV_8UC3, new Scalar( 0,0,0) );
+        Mat histImage = new Mat( histH, histW, CV_8UC3, new Scalar( 0,0,0) );
 
         Core.normalize(bHist, bHist, 0, histImage.rows(), Core.NORM_MINMAX);
         Core.normalize(gHist, gHist, 0, histImage.rows(), Core.NORM_MINMAX);
@@ -312,7 +341,5 @@ public class ResultProcessor {
         float sum = findSumWithoutUsingStream(array);
         return sum / array.length;
     }
-
-
-
 }
+
