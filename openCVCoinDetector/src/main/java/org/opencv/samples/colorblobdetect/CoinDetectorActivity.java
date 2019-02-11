@@ -38,7 +38,6 @@ import android.widget.Toast;
 import static org.opencv.imgproc.Imgproc.circle;
 
 
-
 public class CoinDetectorActivity extends Activity implements OnTouchListener, CvCameraViewListener2 {
     private static final String TAG = "OCVSample::Activity";
 
@@ -58,6 +57,7 @@ public class CoinDetectorActivity extends Activity implements OnTouchListener, C
 
     ArrayList<Mat> matCollection = new ArrayList<>();
     ArrayList<String> coinCollection = new ArrayList<>();
+    private int totMoney;
 
     private ResultProcessor myResultClass;
 
@@ -121,8 +121,7 @@ public class CoinDetectorActivity extends Activity implements OnTouchListener, C
         mOpenCvCameraView.setVisibility(SurfaceView.VISIBLE);
         mOpenCvCameraView.setCvCameraViewListener(this);
         mOpenCvCameraView.setMaxFrameSize(setScreenWidth, setScreenHeight);
-        mOpenCvCameraView.enableFpsMeter();
-
+        //mOpenCvCameraView.enableFpsMeter();
         myResultClass = new ResultProcessor();
     }
 
@@ -158,6 +157,7 @@ public class CoinDetectorActivity extends Activity implements OnTouchListener, C
         circles = new Mat();
         mRgba = new Mat();
         showResults = Mat.zeros(screenHeight, screenWidth, CvType.CV_8UC1);
+        totMoney=0;
 
         screenWidth = getWindowManager().getDefaultDisplay().getWidth();
         screenHeight = getWindowManager().getDefaultDisplay().getHeight();
@@ -178,7 +178,6 @@ public class CoinDetectorActivity extends Activity implements OnTouchListener, C
 
     public Mat onCameraFrame(CvCameraViewFrame inputFrame) {
         Mat returnFrame = new Mat();
-
         mRgba = inputFrame.rgba();
         showCircles = inputFrame.rgba();
 
@@ -186,7 +185,7 @@ public class CoinDetectorActivity extends Activity implements OnTouchListener, C
         Imgproc.medianBlur(mGray, mGray, 5);
 
         Imgproc.HoughCircles(mGray, circles, Imgproc.HOUGH_GRADIENT, 1, mGray.rows() / 8,
-                100, 50, 5, 150);
+                100, 50, 10, 150);
 
         for (int i = 0; i < circles.cols(); i++) {
             double[] vCircle = circles.get(0, i);
@@ -200,15 +199,16 @@ public class CoinDetectorActivity extends Activity implements OnTouchListener, C
 
 
         String myString = "La cantidad de monedas presentes es:" + circles.cols();
+        Imgproc.putText(showCircles, myString, new Point(10, setScreenHeight - 30), Core.FONT_HERSHEY_SIMPLEX, 1, new Scalar(200, 200, 200), 4);
 
-        Imgproc.putText(showCircles, myString, new Point(10, setScreenHeight - 30), Core.FONT_HERSHEY_SIMPLEX, 1, new Scalar(0, 0, 0), 4);
+        //String myString2 = "La cantidad de dinero presente es:" + totMoney;
+        //Imgproc.putText(showCircles, myString2, new Point(10, setScreenHeight - 60), Core.FONT_HERSHEY_SIMPLEX, 1, new Scalar(200, 200, 200), 4);
 
         if(touchdetector==false){
             returnFrame=showCircles;
         }
 
         if(touchdetector){
-
             returnFrame=showResults;
         }
 
@@ -216,24 +216,28 @@ public class CoinDetectorActivity extends Activity implements OnTouchListener, C
     }
 
     public boolean onTouch(View v, MotionEvent event) {
+        Mat circles2=circles.clone();
+        Mat mRgba2=mRgba.clone();
+
         if(touchdetector==false) {
             if(circles.empty()==false) {
-                for (int i = 0; i < circles.cols(); i++) {
-                    matCollection.add(myResultClass.getFrame(mRgba, circles, i));
-                    coinCollection.add(myResultClass.getPrediction());
+                for (int i = 0; i < circles2.cols(); i++) {
+                    matCollection.add(myResultClass.getFrame(mRgba2, circles2, i));
+
+                    String prediction=myResultClass.getPrediction();
+                    coinCollection.add(prediction);
 
                 }
             }
             showResults=myResultClass.assemblyFrame(matCollection,coinCollection);
             matCollection.clear();
             coinCollection.clear();
-
             circles.empty();
+
             touchdetector = true;
         }else{
             touchdetector = false;
         }
-
 
         return false; // don't need subsequent touch events
     }

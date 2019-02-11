@@ -3,6 +3,7 @@ package org.opencv.samples.colorblobdetect;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.io.OutputStream;
 
@@ -12,6 +13,8 @@ import android.util.Log;
 
 import android.graphics.Bitmap;
 import org.opencv.android.Utils;
+
+import org.opencv.core.Algorithm;
 
 import org.opencv.core.Core;
 import org.opencv.core.CvType;
@@ -23,6 +26,7 @@ import org.opencv.core.Rect;
 import org.opencv.imgcodecs.Imgcodecs;
 import org.opencv.core.Scalar;
 import org.opencv.core.Size;
+import org.opencv.imgproc.CLAHE;
 import org.opencv.imgproc.Imgproc;
 
 import static java.lang.System.out;
@@ -49,6 +53,7 @@ public class ResultProcessor {
     private static final Scalar COLOR_BLACK = new Scalar(0x00, 0x00, 0x00, 0xFF);
     private static final Scalar COLOR_WHITE = new Scalar(0xFF, 0xFF, 0xFF, 0xFF);
     private static final Scalar COLOR_RED = new Scalar(0xFF, 0x00, 0x00, 0xFF);
+    private static final Scalar COLOR_BLUE = new Scalar(0xF0, 0xF8, 0xFF, 0xFF);
 
     private int screenWidth;
     private int screenHeight;
@@ -64,7 +69,7 @@ public class ResultProcessor {
     private Mat mRgba15;
     private Mat[] mCells15;
     private String prediction;
-    private boolean mShowTileNumbers = true;
+    private boolean mShowRGB = false;
 
     public ResultProcessor() {
         mTextWidths = new int[GRID_AREA];
@@ -104,7 +109,7 @@ public class ResultProcessor {
         }
 
         for (int i = 0; i < GRID_AREA; i++) {
-            Size s = Imgproc.getTextSize(Integer.toString(i + 1), 3/* CV_FONT_HERSHEY_COMPLEX */, 1, 2, null);
+            Size s = Imgproc.getTextSize(Integer.toString(i + 1), 3/* CV_FONT_HERSHEY_COMPLEX */, 2, 2, null);
             mTextHeights[i] = (int) s.height;
             mTextWidths[i] = (int) s.width;
         }
@@ -117,24 +122,38 @@ public class ResultProcessor {
         // copy tiles
         //i: index of number of tile in screen
         //idx: index of number of coin photo of ArrayList
-
+        int fontscale=0;
+        int xpos=0;
+        if(mShowRGB==true){
+            xpos=2;
+            fontscale=1;
+        }else{
+            xpos=85;
+            fontscale=2;
+        }
         int idx = 0;
-
+        int result = 0;
 
         for (int i = 0; i < GRID_AREA; i++){
             if (((i+1) % GRID_SIZE_X) == 0) {
-                mCells15[i].setTo(COLOR_BLACK);
+                mCells15[i].setTo(COLOR_WHITE);
             }else if (idx>=matCollection.size()){
                 mCells15[i].setTo(COLOR_GREY);
+
             }else{
                 matCollection.get(idx).copyTo(mCells15[i]);
 
-                Imgproc.putText(mCells15[i], coinCollection.get(idx), new Point((screenHeight / GRID_SIZE_Y - mTextWidths[idx])/100,
-                        (screenHeight / GRID_SIZE_Y + mTextHeights[idx])/2), 3/* CV_FONT_HERSHEY_COMPLEX */, 1, COLOR_RED, 2);
+                Imgproc.putText(mCells15[i], coinCollection.get(idx), new Point(xpos,
+                        (screenHeight / GRID_SIZE_Y + mTextHeights[idx])/2), 3/* CV_FONT_HERSHEY_COMPLEX */, fontscale, COLOR_RED, 3);
+
+                result=result+Integer.parseInt(coinCollection.get(idx).substring(0, 1));
 
                 idx++;
             }
         }
+
+        Imgproc.putText(mCells15[16], "$"+Integer.toString(result), new Point(65,
+                (screenHeight / GRID_SIZE_Y + mTextHeights[idx])/2), 3/* CV_FONT_HERSHEY_COMPLEX */, 2, COLOR_RED, 3);
 
         //draw grid
         int rows = screenHeight;
@@ -193,18 +212,8 @@ public class ResultProcessor {
         Utils.bitmapToMat(ScaledBitmap, myCoinScaled);
 
         //PROCESAMIENTO
-
-
-
-
-
-
-
-
-
-
-
-
+        myCoinScaled.convertTo(myCoinScaled, -1, 1, -30);
+        Imgproc.GaussianBlur(myCoinScaled, myCoinScaled,new Size(5,5), 0);
 
         int colour = 0;
         int red = 0;
@@ -232,7 +241,10 @@ public class ResultProcessor {
         }else{
             prediction = "1p";
         }
-        prediction=prediction+Integer.toString(red) + "-" + Integer.toString(green)+ "-" + Integer.toString(blue);
+
+        if(mShowRGB==true) {
+            prediction=prediction+Integer.toString(red) + "-" + Integer.toString(blue)+ "-" + Integer.toString(green);
+        }
 
         return myCoinScaled;
     }
@@ -247,12 +259,12 @@ public class ResultProcessor {
 
         //draw horizontal lines
         for (int i = 1; i < GRID_SIZE_Y; i++) {
-            Imgproc.line(drawMat, new Point(0, i * squareSize), new Point(xLimit, i* squareSize), COLOR_RED, 3);
+            Imgproc.line(drawMat, new Point(0, i * squareSize), new Point(xLimit, i* squareSize), COLOR_BLUE, 3);
         }
 
         //draw vertical lines
         for (int i = 1; i < GRID_SIZE_X; i++) {
-            Imgproc.line(drawMat, new Point(i * squareSize, 0), new Point(i * squareSize, rows), COLOR_RED, 3);
+            Imgproc.line(drawMat, new Point(i * squareSize, 0), new Point(i * squareSize, rows), COLOR_BLUE, 3);
         }
     }
 
@@ -321,25 +333,11 @@ public class ResultProcessor {
 
         Bitmap resultBitmap = Bitmap.createBitmap(histImage.cols(), histImage.rows(),Bitmap.Config.ARGB_8888);
         Utils.matToBitmap(histImage, resultBitmap);
-        int dummy=0;
 
-        red=findAverageWithoutUsingStream(rHistData);
-        green=findAverageWithoutUsingStream(gHistData);
-        blue=findAverageWithoutUsingStream(bHistData);
+
 
     }
 
-    private static float findSumWithoutUsingStream(float[] array) {
-        float sum = 0;
-        for (float value : array) {
-            sum += value;
-        }
-        return sum;
-    }
-
-    private static float findAverageWithoutUsingStream(float[] array) {
-        float sum = findSumWithoutUsingStream(array);
-        return sum / array.length;
-    }
 }
+
 

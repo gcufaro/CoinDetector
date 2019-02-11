@@ -157,5 +157,6 @@
     <orderEntry type="library" name="Gradle: android.arch.lifecycle:common:1.0.3@jar" level="project" />
     <orderEntry type="module" module-name="openCVLibrary342" />
     <orderEntry type="module" module-name="openCVLibrary342" />
+    <orderEntry type="module" module-name="openCVLibrary342" />
   </component>
 </module>
